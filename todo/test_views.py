@@ -54,7 +54,8 @@ class TestViews(TestCase):
 
     def test_can_edit_item(self):
         item = Item.objects.create(name='Test Todo Item')
-        response = self.client.post(f'/edit/{item.id}', {'name': 'Updated Name'})
+        response = self.client.post(
+            f'/edit/{item.id}', {'name': 'Updated Name'})
         # edit the initial response
         self.assertRedirects(response, '/')
         # check it then redirects
