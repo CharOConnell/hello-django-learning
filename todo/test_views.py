@@ -51,3 +51,13 @@ class TestViews(TestCase):
         updated_item = Item.objects.get(id=item.id)
         self.assertFalse(updated_item.done)
         # it should've changed back to being false by then
+
+    def test_can_edit_item(self):
+        item = Item.objects.create(name='Test Todo Item')
+        response = self.client.post(f'/edit/{item.id}', {'name': 'Updated Name'})
+        # edit the initial response
+        self.assertRedirects(response, '/')
+        # check it then redirects
+        updated_item = Item.objects.get(id=item.id)
+        self.assertEqual(updated_item.name, 'Updated Name')
+        # check the updated name is what we changed it to

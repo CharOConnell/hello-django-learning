@@ -9,3 +9,8 @@ class TestModels(TestCase):
         # create a new item
         self.assertFalse(item.done)
         # check it's automatically set to false
+
+    def test_item_string_method_returns_name(self):
+        item = Item.objects.create(name='Test Todo Item')
+        self.assertEqual(str(item), 'Test Todo Item')
+        # check a string is written
